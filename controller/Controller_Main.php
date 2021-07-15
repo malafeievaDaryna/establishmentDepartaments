@@ -33,7 +33,7 @@ class Controller_Main {
             $user = new User($user_name, $email, $phone, $address, $about, $department_id);
             $model = new Model_User();
             Logger::getInstance()->log("attempt to insert ".' '.$user_name.' '.$email.' '.$phone.' '.$address.' '.$about.' '.$department_id);
-            $res = $model->insertUser($user);
+            $res = $model->insertData($user);
         }
         
         if(!$res)

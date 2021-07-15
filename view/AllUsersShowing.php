@@ -1,5 +1,7 @@
 <?php
 require_once "${_SERVER['DOCUMENT_ROOT']}/view/IHTMLBuilder.php";
+require_once "${_SERVER['DOCUMENT_ROOT']}/model/Model_User.php";
+require_once "${_SERVER['DOCUMENT_ROOT']}/model/Model_Department.php";
 
 class AllUsersShowing extends IHTMLBuilder
 {
@@ -7,7 +9,10 @@ class AllUsersShowing extends IHTMLBuilder
     protected function produceContent(): void
     {
         $model = new Model_User();
-        $users = $model->getUsers();
+        $users = $model->getRows();
+        
+        $model = new Model_Department();
+        $departments = $model->getRowsAsKeyValue();
 
         $this->htmlContent .= 
                '<table class="table table-dark">
@@ -34,7 +39,7 @@ class AllUsersShowing extends IHTMLBuilder
                      <td>' . $value->phone. '</td>
                      <td>' . $value->address. '</td>
                      <td>' . $value->about. '</td>
-                     <td>' . $value->departament_id. '</td>
+                     <td>' . $departments[$value->departament_id]. '</td>
                    </tr>';
         }
 		
